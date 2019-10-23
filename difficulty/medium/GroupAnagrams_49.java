@@ -21,9 +21,9 @@ package medium;
 
 import java.util.*;
 
-public class GroupAnagrams {
+public class GroupAnagrams_49 {
     public static void main(String[] args) {
-        GroupAnagrams test = new GroupAnagrams();
+        GroupAnagrams_49 test = new GroupAnagrams_49();
         String[] strs = {"eat", "tea", "tan", "ate", "nat", "bat"};
         List<List<String>> list = test.groupAnagrams2(strs);
         System.out.println(list);

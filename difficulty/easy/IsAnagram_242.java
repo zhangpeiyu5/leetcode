@@ -23,9 +23,9 @@ import java.util.HashMap;
 // 进阶:
 //如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？
 // Related Topics 排序 哈希表
-public class IsAnagram {
+public class IsAnagram_242 {
     public static void main(String[] args) {
-        IsAnagram test = new IsAnagram();
+        IsAnagram_242 test = new IsAnagram_242();
         String s = "rart";
         String t = "artr";
         System.out.println(test.isAnagram3(s, t));

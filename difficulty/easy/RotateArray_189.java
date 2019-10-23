@@ -29,11 +29,11 @@ import java.util.Arrays;
 // 要求使用空间复杂度为 O(1) 的 原地 算法。
 //
 // Related Topics 数组
-public class RotateArray {
+public class RotateArray_189 {
     public static void main(String[] args) {
         int[] nums = {1, 2, 3, 4, 5, 6, 7};
         int k = 3;
-        RotateArray rotateArray = new RotateArray();
+        RotateArray_189 rotateArray = new RotateArray_189();
         rotateArray.rotate3(nums, k);
         System.out.println(Arrays.toString(nums));
     }
