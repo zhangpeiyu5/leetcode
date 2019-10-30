@@ -2,9 +2,7 @@ package difficulty.easy;
 
 import difficulty.medium.Node;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 //给定一个 N 叉树，返回其节点值的层序遍历。 (即从左到右，逐层遍历)。
 //
@@ -40,16 +38,16 @@ public class NTreeLevelOrder_429 {
         Node node2 = new Node(2, new ArrayList<>());
         Node node3 = new Node(4, new ArrayList<>());
         Node root = new Node(1, Arrays.asList(node1, node2, node3));
-        System.out.println(test.levelOrder(root));
+        System.out.println(test.levelOrder2(root));
     }
 
     /**
-     * 方法一：递归法
+     * 方法一：深度优先遍历(DFS)
      *
      * @param root
      * @return
      */
-    public List<List<Integer>> levelOrder(Node root) {
+    public List<List<Integer>> levelOrder1(Node root) {
         List<List<Integer>> lists = new ArrayList<>();
         helper(0, root, lists);
         return lists;
@@ -77,5 +75,39 @@ public class NTreeLevelOrder_429 {
             }
         }
     }
+
+    /**
+     * 方法二：广度优先遍历(BFS)
+     *
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrder2(Node root) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            int curLevelSize = queue.size();
+            List<Integer> list = new ArrayList<>();
+            while (curLevelSize > 0) {
+                Node temp = queue.poll();
+                list.add(temp.val);
+
+                List<Node> children = temp.children;
+                for (int i = 0; i < children.size(); i++) {
+                    queue.add(children.get(i));
+                }
+                curLevelSize--;
+            }
+            res.add(list);
+        }
+        return res;
+    }
+
 }
 
