@@ -68,15 +68,23 @@ public class MinMutation_433 {
      * @return
      */
     public int minMutation1(String start, String end, String[] bank) {
-        dfs(start, end, bank, 0);
+        boolean[] visited = new boolean[bank.length];
+        dfs(start, end, bank, 0, visited);
         if (min == Integer.MAX_VALUE) {
             return -1;
         }
         return min;
     }
 
-    public void dfs(String start, String end, String[] bank, int index) {
-        if (index == bank.length) {
+    /**
+     * @param start
+     * @param end
+     * @param bank
+     * @param index   标记转换次数
+     * @param visited 标记是否访问
+     */
+    public void dfs(String start, String end, String[] bank, int index, boolean[] visited) {
+        if (index == bank.length || start.equals(end)) {
             if (start.equals(end)) {
                 min = Math.min(min, index);
             }
@@ -84,13 +92,10 @@ public class MinMutation_433 {
         }
 
         for (int i = 0; i < bank.length; i++) {
-            if (start.equals(end)) {
-                min = Math.min(min, index);
-                return;
-            } else if (diffOne(start, bank[i]) != 1) {
-                continue;
-            } else {
-                dfs(bank[i], end, bank, index + 1);
+            if (!visited[i] && diffOne(start, bank[i]) == 1) {
+                visited[i] = true;
+                dfs(bank[i], end, bank, index + 1, visited);
+                visited[i] = false;
             }
         }
     }
