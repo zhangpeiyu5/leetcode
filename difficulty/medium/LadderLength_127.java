@@ -115,7 +115,7 @@ public class LadderLength_127 {
 
 
     /**
-     * BFS
+     * 方法二：BFS+预处理
      * 1）为找出相邻节点：对给定的 wordList 做一个【预处理】，将单词中的某个字母用 * 代替，预处理帮我们构造了一个单词变换的通用状态。
      * 例如：Dog ----> D*g <---- Dig，Dog 和 Dig 都指向了一个通用状态 D*g，因此Dog和Dig为相邻节点，D*g对应的list中有：Dog、Dig。
      * 2）进行广度搜索：queue中首先放入beginWord,弹出时，将与beginWord相邻的节点全部放入queue中，并且标记已经访问过的节点，每一层都如此处理，直到弹出的字符串等于endWord。
@@ -132,8 +132,8 @@ public class LadderLength_127 {
 
         //预处理，得到通用状态map
         for (int i = 0; i < wordList.size(); i++) {
+            String word = wordList.get(i);
             for (int j = 0; j < beginWord.length(); j++) {
-                String word = wordList.get(i);
                 String key = word.substring(0, j) + "*" + word.substring(j + 1, word.length());
                 if (dictMap.containsKey(key)) {
                     dictMap.get(key).add(word);
