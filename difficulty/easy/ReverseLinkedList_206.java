@@ -19,7 +19,7 @@ public class ReverseLinkedList_206 {
         head.next.next.next.next = new ListNode(5);
 
 
-        ListNode res = test.reverseList1(head);
+        ListNode res = test.reverseList2(head);
         while (res != null) {
             System.out.println(res.val);
             res = res.next;
@@ -41,19 +41,27 @@ public class ReverseLinkedList_206 {
             prev = curr;
             curr = temp;
         }
-
         return prev;
     }
 
-
     /**
-     * 方法二：递归法 todo
+     * 方法二：递归法
      *
      * @param head
      * @return
      */
     public ListNode reverseList2(ListNode head) {
-        return null;
+        return recusive(head, null);
+    }
+
+    public ListNode recusive(ListNode head, ListNode newNode) {
+        if (head == null) {
+            return newNode;
+        }
+
+        ListNode next = head.next;
+        head.next = newNode;
+        return recusive(next, head);
     }
 
 
