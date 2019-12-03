@@ -1,5 +1,8 @@
 package difficulty.medium;
 
+/**
+ * 实现Trie树
+ */
 public class Trie {
 
     private TrieNode root;
