@@ -26,19 +26,75 @@ package second.dynamicProgram;
 public class ClimbStairs_70 {
     public static void main(String[] args) {
         ClimbStairs_70 test = new ClimbStairs_70();
-        System.out.println(test.climbStairs(3));
+        System.out.println(test.climbStairs3(3));
     }
 
-    public int climbStairs(int n) {
-        int[] nums = new int[n];
+    /**
+     * 方法一：递归法  f(n)=f(n-1)+f(n-2)  （超时）
+     * 缺点：对中间数据没有记录，重复计算
+     * <p>
+     * 时间复杂度：O(2^n)
+     * 空间复杂度：O(n)
+     *
+     * @param n
+     * @return
+     */
+    public int climbStairs1(int n) {
         if (n == 1 || n == 2) {
             return n;
         }
-        nums[0] = 1;
-        nums[1] = 2;
-        for (int i = 2; i < n; i++) {
-            nums[i] = nums[i - 1] + nums[i - 2];
+        return climbStairs1(n - 1) + climbStairs1(n - 2);
+    }
+
+
+    /**
+     * 方法二：动态递推（对中间结果进行记录）
+     * 采用辅助数组，自底向上。
+     * <p>
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)
+     *
+     * @param n
+     * @return
+     */
+    public int climbStairs2(int n) {
+        if (n == 1 || n == 2) {
+            return n;
         }
-        return nums[n - 1];
+        int[] stairs = new int[n];
+        stairs[0] = 1;
+        stairs[1] = 2;
+        for (int i = 2; i < n; i++) {
+            stairs[i] = stairs[i - 1] + stairs[i - 2];
+        }
+        return stairs[n - 1];
+    }
+
+
+    /**
+     * 方法三：动态递推  (对中间结果进行记录）再优化
+     * 用变量代替数组
+     * <p>
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)
+     *
+     * @param n
+     * @return
+     */
+    public int climbStairs3(int n) {
+        if (n == 1 || n == 2) {
+            return n;
+        }
+
+        int first = 1;
+        int second = 2;
+        int third = 0;
+        for (int i = 2; i < n; i++) {
+            third = first + second;
+            first = second;
+            second = third;
+        }
+
+        return third;
     }
 }

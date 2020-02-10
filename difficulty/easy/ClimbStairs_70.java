@@ -23,17 +23,20 @@ package difficulty.easy;
 //2.  1 阶 + 2 阶
 //3.  2 阶 + 1 阶
 //
-// Related Topics 动态规划
+// 斐波拉切数列
 public class ClimbStairs_70 {
     public static void main(String[] args) {
         ClimbStairs_70 test = new ClimbStairs_70();
         int n = 3;
-        System.out.println(test.climbStairs2(n));
+        System.out.println(test.climbStairs3(n));
     }
 
     /**
      * 方法一：递归法  f(n)=f(n-1)+f(n-2)  （超时）
      * 缺点：对中间数据没有记录，重复计算
+     * <p>
+     * 时间复杂度：O(2^n)
+     * 空间复杂度：O(n)
      *
      * @param n
      * @return
@@ -47,7 +50,11 @@ public class ClimbStairs_70 {
 
 
     /**
-     * 方法二：动态规划（对中间结果进行记录）
+     * 方法二：动态递推（对中间结果进行记录）
+     * 采用辅助数组，自底向上。
+     * <p>
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)
      *
      * @param n
      * @return
@@ -63,5 +70,33 @@ public class ClimbStairs_70 {
             stairs[i] = stairs[i - 1] + stairs[i - 2];
         }
         return stairs[n - 1];
+    }
+
+
+    /**
+     * 方法三：动态递推  (对中间结果进行记录）再优化
+     * 用变量代替数组
+     * <p>
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)
+     *
+     * @param n
+     * @return
+     */
+    public int climbStairs3(int n) {
+        if (n == 1 || n == 2) {
+            return n;
+        }
+
+        int first = 1;
+        int second = 2;
+        int third = 0;
+        for (int i = 2; i < n; i++) {
+            third = first + second;
+            first = second;
+            second = third;
+        }
+
+        return third;
     }
 }
